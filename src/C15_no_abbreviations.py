@@ -1,45 +1,69 @@
+import spacy
 import re
+import nltk
+from nltk.corpus import stopwords, words
+from nltk.tokenize import word_tokenize
+from nltk import pos_tag
 
-def check_spacing_sections(text):
-    """
-    Check whether the text is spacing sections with excessive white space (multiple newlines or spaces)
-    while ignoring excessive space between headings and paragraphs.
+# Download required NLTK data if not already available
+nltk.download('stopwords')
+nltk.download('words')
+nltk.download('punkt')
+nltk.download('averaged_perceptron_tagger')
 
-    :param text: The input text to check for excessive white space between sections.
-    :return: True if excessive spacing (more than one blank line or excessive spaces) is found, otherwise False.
-    """
-    # Remove leading and trailing whitespace to ensure we don't count extra space at the edges
-    text = text.strip()
+# Load the spaCy English model
+nlp = spacy.load('en_core_web_sm')
 
-    # Define a pattern to identify headings (we assume headings are uppercase or start with '#' for Markdown)
-    heading_pattern = r'^(#|[A-Z\s]+)$'
+# Load the set of English stopwords from NLTK
+stop_words = set(stopwords.words('english'))
 
-    # Split text into lines and process each line
-    lines = text.splitlines()
+# Load a set of common English words from NLTK corpus
+english_words = set(words.words())
 
-    # We'll use a flag to check the context of the lines
-    previous_was_heading = False
+# Set of common Latin enumerations (Roman numerals)
+roman_numerals = {
+    "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X",
+    "XI", "XII", "XIII", "XIV", "XV", "XVI", "XVII", "XVIII", "XIX", "XX",
+    "XXI", "XXII", "XXIII", "XXIV", "XXV", "XXVI", "XXVII", "XXVIII", "XXIX", "XXX"
+}
 
-    for i, line in enumerate(lines):
-        # If the line is a heading (matches the heading pattern), mark it as a heading
-        if re.match(heading_pattern, line.strip()):
-            previous_was_heading = True
-            continue  # Skip checking whitespace after headings
+def detect_abbreviations(text):
+    # Tokenize the text and tag part-of-speech (POS)
+    tokens = word_tokenize(text)
+    tagged_tokens = pos_tag(tokens)
 
-        # Check for excessive whitespace only between paragraphs
-        if line.strip() == '' and i + 1 < len(lines) and lines[i + 1].strip() == '':
-            # If we find excessive blank lines (2 or more), ensure previous line isn't a heading
-            if not previous_was_heading:
-                return True  # Found excessive spacing between paragraphs
-        else:
-            # Reset heading flag when we find a non-heading line
-            previous_was_heading = False
+    # Match capitalized words with 2+ letters
+    capitalized_words = [word for word, tag in tagged_tokens if word.isupper() and len(word) > 1]
 
-    return False  # No excessive whitespace found between paragraphs
+    # Match short forms like Dr., Mr., U.S.A., FBI, PEDs, etc.
+    short_forms = re.findall(r'\b([A-Z]{2,}|[A-Z]{1,}[a-z]{1})\b', text)
 
+    abbreviations = []
+
+    # Detect abbreviations from capitalized words
+    for word in capitalized_words:
+        if word not in roman_numerals and word.lower() not in english_words:
+            abbreviations.append(word)
+
+    # Detect abbreviations from short forms
+    for short_form in short_forms:
+        if short_form.lower() not in english_words and short_form not in roman_numerals:
+            abbreviations.append(short_form)
+
+    return abbreviations
+
+def C15_score(text):
+    score = 0
+    abbreviations = detect_abbreviations(text)
+
+    if abbreviations:
+        print("---------------------- ABBREVIATIONS ------------------- ")
+        print(f"Abbreviations: {abbreviations}")
+        score = -1
+
+    return score
 
 #
-# # Example usage:
 # text = """
 # Soil erosion is not a general problem in West Africa under indigenous husbandry systems. It
 # is, however, locally a chronic problem, and in many areas a potential hazard under changing
@@ -111,7 +135,7 @@ def check_spacing_sections(text):
 # rainfall in many years
 # since 1968 has brought about reduced yields of these crops in the countries and has
 # reduced the potential germination of seeds. Particularly the seeds of millet and sorghum
-# have suffered a great deal from this instance.
+# have suffered a great deal from this instance Alexander II.
 #
 # Ghana just like many other tropical countries is very much vulnerable to climate change and
 # variability. An estimated 35 percent of the total land mass is desert and since the 1980s the
@@ -122,12 +146,5 @@ def check_spacing_sections(text):
 # rice, millet, sorghum, soybean, cowpea and groundnut, and also engage in the rearing
 # of small ruminants such as sheep and goat.
 # """
-# result = check_spacing_sections(text)
-# print(result)  # This will print True due to excessive whitespace between sections
-
-def C1_score(text):
-    if check_spacing_sections(text):
-        return 1
-    return 0
-
-# print(C1_score(text))
+#
+# print(C15_score(text))
