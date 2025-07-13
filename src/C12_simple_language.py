@@ -36,15 +36,7 @@ def calculate_simple_language_percentage_using_readability(text):
     if score > 100:
          return 1  # Assume 100% simple if score is high (easier to read)
     return score/50 -1
-    # # The readability score ranges from 0 to 100; higher is easier to read.
-    # if score > 60:
-    #     return 100  # Assume 100% simple if score is high (easier to read)
-    # elif score > 50:
-    #     return 70  # A bit complex but still mostly simple
-    # elif score > 40:
-    #     return 50  # Quite complex
-    # else:
-    #     return 30  # Very complex text
+
 
 # Function for Part-of-Speech tagging method to calculate simple language percentage
 def is_simple_word_pos(word, pos):
@@ -124,25 +116,10 @@ def calculate_gunning_fog_index(text):
     else:
         return 0
 
-# Function to scale GFI to a -1-1 range (higher = simpler language)
-# # The function determines the "difficult" reading point to start above 14 gfi score
-# def scale_gfi_to_100(gfi, max_gfi=14):
-#     gfi = float(gfi)  # Ensure GFI is a float to avoid TypeError
-#     if gfi>14:
-#         return max(-1, 1 - gfi / max_gfi)  # Invert and scale to [-1,1]
-#     return max(1, 1-gfi/max_gfi)
+
 
 def scale_gfi_to_1(gfi, max_gfi=20):
-    """
-    Scale the Gunning Fog Index (GFI) to a range between -1 and 1,
-    with a turning point at 14.
-    - Scores below 14 will be scaled negatively from 0 to -1.
-    - Scores above 14 will be scaled positively from 0 to 1.
 
-    :param gfi: The Gunning Fog Index value.
-    :param max_gfi: The maximum GFI value to consider for the positive scaling (default is 50).
-    :return: A scaled GFI value between -1 and 1.
-    """
     if gfi < 14:
         # Scale GFI <= 14 to a negative range [-1, 0]
         return (14 - gfi) / 14
@@ -165,15 +142,6 @@ def calculate_average_simple_language_percentage(text):
     average_percentage = (readability_percentage + gfi_percentage) / 2
     return average_percentage
 
-# # Example usage
-# text = """Ghana just like many other tropical countries is very much vulnerable to climate change and
-# variability. An estimated 35 percent of the total land mass is desert and since the 1980s the
-# has been increasing desertification of the northern part of the country. Desertification in
-# Ghana is currently estimated to be proceeding at a rate of 20,000 hectares per annum
-# thereby compromising water resource. n northern Ghana, these farmers are usually
-# involved in the cultivation of staple grains including maize"""
-# average_percentage = calculate_average_simple_language_percentage(text)
-# print(f"Average Percentage of Simple Language: {average_percentage:.2f}%")
 
-def C9_score(text):
+def C12_score(text):
     return calculate_average_simple_language_percentage(text)

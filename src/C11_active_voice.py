@@ -23,10 +23,6 @@ def active_voice_score(text):
         )
     return active_score-passive_percentage
 
-# text = """The papaer was made to be published in this venue. Please provide me with a question so I can give you an answer in bullet points! 😊  \n\nFor example, you could ask: \n\n* What are the benefits of exercise?\n* What are the main ingredients in a cake?\n* How do I change a tire? \n\n\nLet me know what you'd like to learn about! 🚀 \n"""
-#
-#
-# print(active_voice_score(text))
 
-def C8_score(text):
+def C11_score(text):
     return active_voice_score(text)

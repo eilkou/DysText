@@ -68,17 +68,7 @@ def calculate_short_sentence_score(text):
 
     return sentence_scores, score
 
-# # Example usage:
-# text = """This is a short sentence.
-# Here we have another example sentence.
-# This sentence is a bit longer, as it includes more characters to make it longer.
-# This sentence is a bit longer, as it includes more characters to make it longer, this sentence is a bit longer, as it includes more characters to make it longer, this sentence is a bit longer, as it.
-# This sentence is a bit longer, as it includes more characters to make it longer, this sentence is a bit longer, as it includes more characters to make it longer, this sentence is a bit longer, as it includes more characters to make it longer. But it's still not too long to be counted as an average sentence length."""
-#
-# sentence_scores, overall_score = calculate_short_sentence_score(text)
-# print("Overall Score:", overall_score)
 
-
-def C5_score(text):
+def C7_score(text):
     sentence_scores, overall_score = calculate_short_sentence_score(text)
     return overall_score

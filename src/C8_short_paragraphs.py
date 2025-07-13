@@ -47,28 +47,7 @@ def calculate_long_paragraph_score(text, ok_threshold=4, bad_threshold=6):
     overall_score = sum(paragraph_scores) / total_paragraphs
 
     return good_paragraph_percentage, overall_score
-    # return {
-    #     "Good Paragraph Percentage": good_paragraph_percentage,
-    #     "Score": overall_score  # Average score for all paragraphs
-    # }
 
-# # Example usage:
-# text = """This is a short paragraph.
-# It has only a few sentences.
-#
-# This is a medium-length paragraph. It has more sentences, but it's not too long.
-#
-# This is a very long paragraph. It has a lot of sentences, making it quite long. We are testing whether the function will give it a negative score based on how many sentences it has.
-#
-# This is a very long paragraph. It has a lot of sentences, making it quite long. We are testing whether the function will give it a negative score based on how many sentences it has. This is a very long paragraph. It has a lot of sentences, making it quite long. We are testing whether the function will give it a negative score based on how many sentences it has.
-#
-# This is a very long paragraph. It has a lot of sentences, making it quite long. We are testing whether the function will give it a negative score based on how many sentences it has. This is a very long paragraph. It has a lot of sentences, making it quite long. We are testing whether the function will give it a negative score based on how many sentences it has. This is a very long paragraph. It has a lot of sentences, making it quite long. We are testing whether the function will give it a negative score based on how many sentences it has. This is a very long paragraph. It has a lot of sentences, making it quite long. We are testing whether the function will give it a negative score based on how many sentences it has.
-#
-# """
-
-# result = calculate_long_paragraph_score(text)
-# print(result)
-
-def C6_score(text):
+def C8_score(text):
     good_paragraph_percentage, overall_score =calculate_long_paragraph_score(text)
     return overall_score

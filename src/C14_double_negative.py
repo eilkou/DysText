@@ -3,7 +3,7 @@ import spacy
 # Load the spaCy English model
 nlp = spacy.load('en_core_web_sm')
 
-# C11: Function to detect double negatives
+
 def detect_double_negatives(doc):
     double_negatives = []
     double_negative_count = 0
@@ -31,19 +31,7 @@ def detect_double_negatives(doc):
     return double_negatives, double_negative_count
 
 
-# Detect double negatives in the text
-# text = "I am not ungrateful for the opportunity. It's not unlikely that they will succeed. She isn't unfriendly."
-#
-# # Process the text
-# doc = nlp(text)
-# double_negative_sentences, total_double_negatives = detect_double_negatives(doc)
-# print("Double negatives detected in sentences:")
-# for sentence in double_negative_sentences:
-#     print(f"  - {sentence}")
-# print(f"Total number of double negatives: {total_double_negatives}")
-
-
-def C11_score(text):
+def C14_score(text):
     doc=nlp(text)
     double_negative_sentences, total_double_negatives = detect_double_negatives(doc)
     if total_double_negatives>0:
@@ -51,4 +39,4 @@ def C11_score(text):
         print("Double negatives detected in sentences:", double_negative_sentences)
     return max(-1, -total_double_negatives/5)
 
-# print(C11_score(text))
+
