@@ -44,6 +44,9 @@ git clone https://github.com/eilkou/DysText.git
 cd DysText
 ```
 
+### Requirements
+- Python ≥ 3.11
+  
 Install packages:
 
 ```bash
@@ -55,6 +58,7 @@ Run DysText:
 ```bash
 python src/main.py
 ```
+
 
 ## How to Cite
 **BibTeX:**
