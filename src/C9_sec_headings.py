@@ -15,7 +15,7 @@ def detect_headings(text):
 
 
 def C9_score(text):
-    has_headings, headings = detect_headings_and_toc(text)
+    has_headings, headings = detect_headings(text)
     score=0
     if has_headings:
         print("------------------- HEADINGS --------------------")
