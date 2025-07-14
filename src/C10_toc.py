@@ -23,7 +23,7 @@ def detect_toc(text):
 
 
 def C10_score(text):
-    has_toc, toc = detect_headings_and_toc(text)
+    has_toc, toc = detect_toc(text)
     score=0
     if has_toc:
         print("------------------- TABLE OF CONTENT --------------------")
