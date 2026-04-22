@@ -18,7 +18,7 @@ We are honored by this recognition and grateful to the community! 🙏
 
 ## Project Summary
 
-This project uses **DysText**, a novel metric designed to evaluate and quantify the dyslexia-friendliness of text outputs, particularly from language models (LMs). It is built on accessibility principles from the **[British Dyslexia Association’s Dyslexia Style Guide](https://cdn.bdadyslexia.org.uk/uploads/documents/Advice/style-guide/BDA-Style-Guide-2023.pdf?v=1680514568)** and aims to support research into how well AI systems adhere to these criteria.
+This project evaluates the dyslexia-friendliness of Language Models based on their text outputs. It is built on accessibility principles from the **[British Dyslexia Association’s Dyslexia Style Guide](https://cdn.bdadyslexia.org.uk/uploads/documents/Advice/style-guide/BDA-Style-Guide-2023.pdf?v=1680514568)** and aims to support research into how well AI systems adhere to these criteria.
 
 The study critically assesses popular LLMs on their ability to:
 - Identify dyslexia-relevant stylistic features
@@ -26,8 +26,7 @@ The study critically assesses popular LLMs on their ability to:
 
 ## 🔬 Research Context
 
-- LMs knowledge of dyslexia-friendly criteria in text _(Go to [data/RQ1](https://github.com/eilkou/DysText/tree/main/data/RQ1))_
-- A custom metric for measuring dyslexia-friendliness in text 
+- LMs knowledge of dyslexia-friendly criteria in text _(Go to [data/RQ1](https://github.com/eilkou/DysText/tree/main/data/RQ1))_ 
 - Implementation based on the British Dyslexia Association’s Style Guide
 - Proof-of-concept evaluation of LLM outputs _(Check our paper)_
 - Easily extensible and open-source
@@ -35,7 +34,7 @@ The study critically assesses popular LLMs on their ability to:
 For more context, please refer to the [original paper](https://github.com/eilkou/DysText/blob/main/_AIED25__Dyslexia___AI___Camera_ready.pdf)
 
 
-## 🛠️ Usage of DysText
+## 🛠️ Usage of the code
 
 Clone the repository:
 
