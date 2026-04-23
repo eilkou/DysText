@@ -33,4 +33,30 @@ This work provides a structured analysis of how feedback signals affect accessib
 - Accessibility evaluation in iterative feedback pipelines  
 - Alignment of LLM outputs with accessibility requirements  
 
+---
 
+## Repository structure
+
+## 📁 src/
+Contains all source code for the project.
+- `agent.py`: main entry point for running the pipeline.
+- `prompter.py`: task specification, prompts and connection with LLM.
+- `checker.py`: formative assessment, checks on long phrases and factual drift.
+- `judge.py`: feedback policy, learning analytic metrics on readability and dyslexia acceessibility.
+
+## 📁 data/
+Contains the input data used in the experiments.
+- `chapters.json`: the dataset of text chapters.
+
+## 📁 results/
+Contains the outputs produced by the system, including computed metrics and analysis results.
+
+---
+
+## ▶️ How to Run
+
+Make sure you have Python installed and an OpenAI key to be added in `prompter.py`.  
+Run the main pipeline using:
+
+```bash
+python src/agent.py data/chapters.json YOUR-EXPORT.json
